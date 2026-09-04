@@ -1,0 +1,11 @@
+{
+    "al.enableCodeAnalysis": false,
+    "al.codeAnalyzers": [
+        "${AppSourceCop}"
+    ],
+    "al.packageCachePath": "./.alpackages",
+    "al.backgroundCodeAnalysis": true,
+    "CRS.RemovePrefixFromFilename": true,
+    "editor.formatOnSave": true,
+    "CRS.OnSaveAlFileAction": "Rename"
+}

@@ -1,0 +1,64 @@
+{
+  "id": "47f7a561-1e25-41c6-ad3b-54ca92f38d12",
+  "name": "BC28_TEST",
+  "publisher": "Default Publisher",
+  "version": "28.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "id": "5ecfc871-5d82-43f1-9c54-59685e82318d",
+      "publisher": "LS Retail",
+      "name": "LS Central",
+      "version": "28.0.0.1608"
+    },
+    {
+      "id": "dd0be2ea-f733-4d65-bb34-a28f4624fb14",
+      "publisher": "Microsoft",
+      "name": "Library Assert",
+      "version": "28.0.46665.49032"
+    },
+    {
+      "id": "d852d5d2-a39d-4179-baeb-f99a19e32510",
+      "publisher": "Microsoft",
+      "name": "Application Test Library",
+      "version": "28.0.46665.49032"
+    },
+    {
+      "id": "9856ae4f-d1a7-46ef-89bb-6ef056398228",
+      "publisher": "Microsoft",
+      "name": "System Application Test Library",
+      "version": "28.0.46665.49032"
+    }
+    ,
+    {
+      "id": "5d86850b-0d76-4eca-bd7b-951ad998e997",
+      "publisher": "Microsoft",
+      "name": "Tests-TestLibraries",
+      "version": "28.0.46665.49032"
+    }
+  ],
+  "screenshots": [],
+  "platform": "28.0.0.0",
+  "application": "28.0.0.0",
+  "idRanges": [
+    {
+      "from": 50000,
+      "to": 60000
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "17.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
