@@ -35,6 +35,7 @@ page 50002 "Log_TestRunner"
                 Image = TestDatabase;
                 Promoted = true;
                 PromotedCategory = Process;
+                PromotedIsBig = true;
                 trigger OnAction()
                 begin
                     Codeunit.Run(Codeunit::MyTestRunner)
@@ -47,21 +48,13 @@ page 50002 "Log_TestRunner"
                 Image = CalculateRemainingUsage;
                 Promoted = true;
                 PromotedCategory = Process;
+                PromotedIsBig = true;
                 trigger OnAction()
                 var
                     EnabledTestCodeunit: Record "CAL Test Enabled Codeunit";
                     Object: Record AllObj;
                     CALTestMng: Codeunit "CAL Test Management";
                 begin
-                    // CALTestMng.EnableTestToRun();
-                    // if EnabledTestCodeunit.FINDSET then
-                    //     repeat
-                    //         if Object.Get(ObjectType::Codeunit, EnabledTestCodeunit."Test Codeunit ID") then
-                    //             Message('%1', EnabledTestCodeunit."Test Codeunit ID");
-                    //     until EnabledTestCodeunit.NEXT = 0
-                    // else
-                    //     Message('No');
-
                     Codeunit.Run(Codeunit::AnyTestRunner)
                 end;
             }
@@ -72,7 +65,7 @@ page 50002 "Log_TestRunner"
                 Image = Delete;
                 Promoted = true;
                 PromotedCategory = Process;
-
+                PromotedIsBig = true;
                 trigger OnAction()
                 var
                     LogTestRunner: Record LogTestRunner;
@@ -92,10 +85,11 @@ page 50002 "Log_TestRunner"
                 Caption = 'Show Duplicate Mobile Phone';
                 ApplicationArea = All;
                 Image = Find;
-
+                Promoted = true;
+                PromotedCategory = Category4;
                 trigger OnAction()
                 var
-                    HandleFunction: Codeunit HandleFunction;
+                    HandleFunction: Codeunit NormalFunction;
                 begin
                     ShowDuplicate();
                 end;
@@ -105,7 +99,8 @@ page 50002 "Log_TestRunner"
                 Caption = 'Ivarn';
                 ApplicationArea = All;
                 Image = Action;
-
+                Promoted = true;
+                PromotedCategory = Category4;
                 trigger OnAction()
                 begin
                     testMessegeFilter();
@@ -116,6 +111,8 @@ page 50002 "Log_TestRunner"
                 Caption = 'ShowCustomerDataset';
                 ApplicationArea = All;
                 Image = Action;
+                Promoted = true;
+                PromotedCategory = Category4;
                 trigger OnAction()
                 begin
                     ShowCustomerReportDataset();
@@ -126,9 +123,39 @@ page 50002 "Log_TestRunner"
                 Caption = 'ShowFilter';
                 ApplicationArea = All;
                 Image = ShowSelected;
+                Promoted = true;
+                PromotedCategory = Category4;
                 trigger OnAction()
                 begin
                     ShowCustomerFilter();
+                end;
+            }
+            action(TableCaption)
+            {
+                Caption = 'TableCaption';
+                ApplicationArea = All;
+                Image = Capacities;
+                Promoted = true;
+                PromotedCategory = Category4;
+                trigger OnAction()
+                var
+                    ALLOG: Record "AL Test Runner Log";
+                    LogTestCodeunit: Record "LogTestCodeunit";
+                begin
+                    Message('%1', ALLOG.TableCaption());
+                    Message('%1', LogTestCodeunit.TableCaption());
+                end;
+            }
+            action(Cust_Filter)
+            {
+                Caption = 'Customer Filter';
+                ApplicationArea = All;
+                Image = UseFilters;
+                Promoted = true;
+                PromotedCategory = Category4;
+                trigger OnAction()
+                begin
+                    RunCustomerFilter();
                 end;
             }
         }
@@ -173,7 +200,7 @@ page 50002 "Log_TestRunner"
 
         // Customer.SetFilter("No.", '10000..20000');
         // 2. Run Report และโหลด Dataset
-        LibraryReportDataset.RunReportAndLoad(Report::"Customer - List", RecordVariant, XmlParameters);
+        LibraryReportDataset.RunReportAndLoad(Report::"Customer - List", Customer, XmlParameters);
 
         Message('Total Dataset Rows = %1', LibraryReportDataset.RowCount());
 
@@ -206,5 +233,32 @@ page 50002 "Log_TestRunner"
                     'Customer No. = %1',
                     Customer."No.");
             until Customer.Next() = 0;
+    end;
+
+    procedure RunCustomerFilter()
+    var
+        Customer: Record Customer;
+        FilterPage: FilterPageBuilder;
+        FilterResult: Text;
+    begin
+        // สร้าง Filter Page สำหรับ Table Customer
+        FilterPage.AddRecord(Customer.TableCaption(), Customer);
+
+        // เพิ่ม Field "No." ให้ผู้ใช้กรองได้
+        FilterPage.AddField(Customer.TableCaption(), Customer."No.");
+
+        // เปิด Filter Page ให้ผู้ใช้กรอก
+        if FilterPage.RunModal() then begin
+            // ถ้าผู้ใช้กด OK → ดึง Filter ที่กรอกออกมา
+            FilterResult := FilterPage.GetView(Customer.TableCaption());
+            Message('Filter ที่ผู้ใช้กรอกคือ: %1', FilterResult);
+
+            Customer.SetView(FilterResult);
+            if Customer.FindSet() then
+                repeat
+                    Message('Customer: %1', Customer."No.");
+                until Customer.Next() = 0;
+        end else
+            Message('ผู้ใช้กด Cancel');
     end;
 }

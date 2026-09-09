@@ -1,4 +1,4 @@
-codeunit 50003 HandleFunction
+codeunit 50003 NormalFunction
 {
     procedure DeleteCustomer(): Boolean
     begin

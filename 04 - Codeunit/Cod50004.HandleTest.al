@@ -3,7 +3,7 @@ codeunit 50004 HandleTest
     Subtype = Test;
 
     var
-        HandleF: Codeunit HandleFunction;
+        HandleF: Codeunit NormalFunction;
         Assert: Codeunit "Library Assert";
 
     [Test]
@@ -43,11 +43,6 @@ codeunit 50004 HandleTest
         Assert.AreEqual(2, Result, '');
     end;
 
-    // [StrMenuHandler]
-    // procedure MyMenuHandler(Options: Text; var Choice: Integer)
-    // begin
-    //     Choice := 2;
-    // end;
 
     [StrMenuHandler]
     procedure MyMenuHandler(Options: Text[1024]; var Choice: Integer; Instruction: Text[1024])

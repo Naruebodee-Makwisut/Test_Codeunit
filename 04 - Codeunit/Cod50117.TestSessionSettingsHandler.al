@@ -4,7 +4,7 @@ codeunit 50117 TestSessionSettingsHandler
 
     var
         Assert: Codeunit "Library Assert";
-        HandleFunction: Codeunit HandleFunction;
+        HandleFunction: Codeunit NormalFunction;
 
     [Test]
     // [HandlerFunctions('SessionSettingsHandler')]

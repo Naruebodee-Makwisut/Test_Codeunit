@@ -1,4 +1,4 @@
-codeunit 50012 "SalesOrderTests"
+codeunit 50012 "SalesOrderTestsHandler"
 {
     Subtype = Test;
 

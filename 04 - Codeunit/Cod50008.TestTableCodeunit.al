@@ -4,7 +4,7 @@ codeunit 50008 TestTableCodeunit
     Subtype = Test;
 
     var
-        CustomerManagement: Codeunit "TableManagement";
+        // CustomerManagement: Codeunit "TableManagement";
         Assert: Codeunit "Library Assert";
 
     [Test]
@@ -12,7 +12,7 @@ codeunit 50008 TestTableCodeunit
     var
         Customer: Record Customer;
     begin
-        CustomerManagement.CreateCustomer('TEST001', 'Test Customer');
+        CreateCustomer('TEST001', 'Test Customer');
 
         Customer.Get('TEST001');
 
@@ -27,9 +27,9 @@ codeunit 50008 TestTableCodeunit
     var
         Customer: Record Customer;
     begin
-        CustomerManagement.CreateCustomer('TEST002', 'Old Name');
+        CreateCustomer('TEST002', 'Old Name');
 
-        CustomerManagement.RenameCustomer('TEST002', 'New Name');
+        RenameCustomer('TEST002', 'New Name');
 
         Customer.Get('TEST002');
 
@@ -40,11 +40,11 @@ codeunit 50008 TestTableCodeunit
     [Test]
     procedure TestCreateDuplicateCustomer()
     begin
-        CustomerManagement.CreateCustomer('TEST003', 'First Customer');
+        CreateCustomer('TEST003', 'First Customer');
 
         Assert.ExpectedError('Customer TEST003 already exists.');
 
-        CustomerManagement.CreateCustomer('TEST003', 'Second Customer');
+        CreateCustomer('TEST003', 'Second Customer');
     end;
 
     //5
@@ -52,7 +52,7 @@ codeunit 50008 TestTableCodeunit
     procedure TestRenameNonExistingCustomer()
     begin
         Assert.ExpectedError('Customer TEST999 does not exist.');
-        CustomerManagement.RenameCustomer('TEST999', 'New Name');
+        RenameCustomer('TEST999', 'New Name');
 
     end;
 
@@ -62,7 +62,7 @@ codeunit 50008 TestTableCodeunit
     var
         Customer: Record Customer;
     begin
-        CustomerManagement.CreateCustomer('TEST004', 'Test Customer');
+        CreateCustomer('TEST004', 'Test Customer');
 
         Customer.Get('TEST004');
 
@@ -78,6 +78,30 @@ codeunit 50008 TestTableCodeunit
 
         if not Customer.Get('TEST999') then
             Error('Customer TEST999 does not exist.');
+    end;
+
+    procedure CreateCustomer(CustomerNo: Code[20]; CustomerName: Text[100])
+    var
+        Customer: Record Customer;
+    begin
+        if Customer.Get(CustomerNo) then
+            Error('Customer %1 already exists.', CustomerNo);
+
+        Customer.Init();
+        Customer."No." := CustomerNo;
+        Customer.Validate(Name, CustomerName);
+        Customer.Insert();
+    end;
+
+    procedure RenameCustomer(CustomerNo: Code[20]; NewName: Text[100])
+    var
+        Customer: Record Customer;
+    begin
+        if not Customer.Get(CustomerNo) then
+            Error('Customer %1 does not exist.', CustomerNo);
+
+        Customer.Validate(Name, NewName);
+        Customer.Modify();
     end;
 
 }

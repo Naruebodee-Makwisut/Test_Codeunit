@@ -21,9 +21,10 @@ codeunit 50130 MyReportFullTest
     begin
 
         XmlParameters := Report.RunRequestPage(Report::"Customer - List");
-        LibraryReportDataset.RunReportAndLoad(Report::"Customer - List", RecordVariant, XmlParameters);
-
         Customer.SetFilter("No.", '10000..20000');
+        LibraryReportDataset.RunReportAndLoad(Report::"Customer - List", Customer, XmlParameters);
+
+        // Customer.SetFilter("No.", '10000..20000');
 
         if Customer.FindSet() then
             repeat

@@ -4,13 +4,14 @@ codeunit 50118 TestFilterPageHandler
 
     var
         Assert: Codeunit "Library Assert";
-        HandleFunction: Codeunit HandleFunction;
+        HandleFunction: Codeunit NormalFunction;
 
     [Test]
     [HandlerFunctions('CustomerFilterPageHandler')]
     procedure TestCustomerFilterPage()
     begin
         HandleFunction.RunCustomerFilter();
+        RunCustomerFilter();
     end;
 
     [FilterPageHandler]
@@ -20,10 +21,22 @@ codeunit 50118 TestFilterPageHandler
     begin
         NoField := CustomerRef.Field(1);
 
-        NoField.SetFilter('TEST*');
+        NoField.SetFilter('TEST1*');
 
-        Assert.AreEqual('TEST*', NoField.GetFilter(), 'Customer No. filter is incorrect.');
+        Assert.AreEqual('TEST2*', NoField.GetFilter(), 'Customer No. filter is incorrect.');
 
         exit(true);
+    end;
+
+    procedure RunCustomerFilter()
+    var
+        Customer: Record Customer;
+        FilterPage: FilterPageBuilder;
+    begin
+        FilterPage.AddRecord(Customer.TableCaption(), Customer);
+
+        FilterPage.AddField(Customer.TableCaption(), Customer."No.");
+
+        FilterPage.RunModal();
     end;
 }
