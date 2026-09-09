@@ -20,7 +20,8 @@ codeunit 50020 MyTestRunner
         // Codeunit.Run(Codeunit::TestFilterPageHandler);
         // Codeunit.Run(Codeunit::MyCodeunit10);
         // Codeunit.Run(Codeunit::TestTransaction);
-        Codeunit.Run(Codeunit::MyReportFullTest);
+        // Codeunit.Run(Codeunit::MyReportFullTest);
+        Codeunit.Run(Codeunit::TestFilterPageHandler);
     end;
 
     trigger OnAfterTestRun(CodeunitId: Integer; CodeunitName: Text; FunctionName: Text; Permissions: TestPermissions; Success: Boolean)

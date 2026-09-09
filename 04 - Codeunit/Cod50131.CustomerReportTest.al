@@ -7,8 +7,12 @@ codeunit 50131 "Customer Report Test"
     procedure TestCustomerFilter()
     var
         HandleFunction: Codeunit HandleFunction;
+        Customer: Record Customer;
+        FilterPage: FilterPageBuilder;
     begin
         HandleFunction.RunCustomerFilter();
+
+        FilterPage.AddField('Customer', Customer."No.");
     end;
 
     [FilterPageHandler]
@@ -16,5 +20,18 @@ codeunit 50131 "Customer Report Test"
     begin
         // จัดการ Filter Page
         exit(true);
+    end;
+
+    procedure TestCode1()
+    var
+        FilterPage: FilterPageBuilder;
+        Customer: Record Customer;
+    begin
+        FilterPage.AddField(
+            'Customer No.',
+            Customer."No."
+        );
+
+        FilterPage.RunModal();
     end;
 }
