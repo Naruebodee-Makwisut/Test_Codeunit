@@ -1,7 +1,7 @@
 codeunit 50023 TestIsolationDisabled
 {
     Subtype = Test;
-    RequiredTestIsolation = None;
+    RequiredTestIsolation = Disabled;
 
     [Test]
     [TransactionModel(TransactionModel::AutoCommit)]

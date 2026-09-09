@@ -6,7 +6,7 @@ codeunit 50131 "Customer Report Test"
     [HandlerFunctions('CustomerFilterHandler')]
     procedure TestCustomerFilter()
     var
-        HandleFunction: Codeunit HandleFunction;
+        HandleFunction: Codeunit NormalFunction;
         Customer: Record Customer;
         FilterPage: FilterPageBuilder;
     begin

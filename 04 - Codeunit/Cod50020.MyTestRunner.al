@@ -18,7 +18,6 @@ codeunit 50020 MyTestRunner
         // Codeunit.Run(Codeunit::TestSendNotificationHandler);
         // Codeunit.Run(Codeunit::TestRecallNotificationHandler);
         // Codeunit.Run(Codeunit::TestFilterPageHandler);
-        // Codeunit.Run(Codeunit::MyCodeunit10);
         // Codeunit.Run(Codeunit::TestTransaction);
         // Codeunit.Run(Codeunit::MyReportFullTest);
         Codeunit.Run(Codeunit::TestFilterPageHandler);

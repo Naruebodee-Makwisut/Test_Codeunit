@@ -19,7 +19,6 @@ codeunit 50005 TestItemInStore
         Report.Run(Report::"LSC Item in Store", false, false, ItemDistribution);
 
         // Assert
-        // ถ้า Report มี Error Test จะ Fail อัตโนมัติ
         Assert.IsTrue(true, '');
     end;
 

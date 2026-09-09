@@ -4,7 +4,7 @@ codeunit 50114 TestSendNotificationHandler
 
     var
         Assert: Codeunit "Library Assert";
-        HandleFunction: Codeunit HandleFunction;
+        HandleFunction: Codeunit NormalFunction;
 
     [Test]
     [HandlerFunctions('SendNotificationHandler')]

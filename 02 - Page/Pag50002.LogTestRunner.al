@@ -89,7 +89,7 @@ page 50002 "Log_TestRunner"
                 PromotedCategory = Category4;
                 trigger OnAction()
                 var
-                    HandleFunction: Codeunit HandleFunction;
+                    HandleFunction: Codeunit NormalFunction;
                 begin
                     ShowDuplicate();
                 end;

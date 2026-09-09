@@ -4,7 +4,7 @@ codeunit 50118 TestFilterPageHandler
 
     var
         Assert: Codeunit "Library Assert";
-        HandleFunction: Codeunit HandleFunction;
+        HandleFunction: Codeunit NormalFunction;
 
     [Test]
     [HandlerFunctions('CustomerFilterPageHandler')]
