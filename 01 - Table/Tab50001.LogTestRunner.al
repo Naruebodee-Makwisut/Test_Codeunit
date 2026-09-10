@@ -41,7 +41,10 @@ table 50001 LogTestRunner
         {
             DataClassification = ToBeClassified;
         }
-
+        field(10; CallStack; Text[250])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

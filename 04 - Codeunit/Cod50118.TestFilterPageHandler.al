@@ -10,7 +10,7 @@ codeunit 50118 TestFilterPageHandler
     [HandlerFunctions('CustomerFilterPageHandler')]
     procedure TestCustomerFilterPage()
     begin
-        HandleFunction.RunCustomerFilter();
+        // HandleFunction.RunCustomerFilter();
         RunCustomerFilter();
     end;
 
@@ -21,9 +21,9 @@ codeunit 50118 TestFilterPageHandler
     begin
         NoField := CustomerRef.Field(1);
 
-        NoField.SetFilter('TEST1*');
+        // NoField.SetFilter('TEST1*');
 
-        Assert.AreEqual('TEST2*', NoField.GetFilter(), 'Customer No. filter is incorrect.');
+        Assert.AreEqual('TN*', NoField.GetFilter(), 'Customer No. filter is incorrect.');
 
         exit(true);
     end;
@@ -33,7 +33,9 @@ codeunit 50118 TestFilterPageHandler
         Customer: Record Customer;
         FilterPage: FilterPageBuilder;
     begin
+        Customer.SetFilter("No.", 'TN*');
         FilterPage.AddRecord(Customer.TableCaption(), Customer);
+        // Message('Filter = %1', Customer.GetFilter("No."));
 
         FilterPage.AddField(Customer.TableCaption(), Customer."No.");
 

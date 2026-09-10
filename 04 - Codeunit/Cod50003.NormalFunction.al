@@ -18,13 +18,6 @@ codeunit 50003 NormalFunction
         exit(StrMenu('Apple,Banana,Orange'));
     end;
 
-    procedure OpenCustomer()
-    var
-        Customer: Record Customer;
-    begin
-        Page.Run(Page::"Customer Card");
-    end;
-
     procedure CheckCustomer()
     var
         Notification: Notification;

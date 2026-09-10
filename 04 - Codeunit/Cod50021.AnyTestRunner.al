@@ -47,8 +47,10 @@ codeunit 50021 AnyTestRunner
             log.Status := log.Status::Success
         else begin
             log.Status := log.Status::Failure;
-            if FunctionName <> '' then
+            if FunctionName <> '' then begin
                 log.Message := GetLastErrorText;
+                log.CallStack := CopyStr(GetLastErrorCallStack, 1, MaxStrLen(log.CallStack));
+            end;
         end;
         log.Duration := log.After - log.Before;
         log.Insert();

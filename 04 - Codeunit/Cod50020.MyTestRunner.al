@@ -14,13 +14,15 @@ codeunit 50020 MyTestRunner
 
     trigger OnRun()
     begin
+        Codeunit.Run(Codeunit::TestReportHandler);
+        // Codeunit.Run(Codeunit::CodeunitTestBasic);
         // Codeunit.Run(Codeunit::TestHyperLinkHandler);
         // Codeunit.Run(Codeunit::TestSendNotificationHandler);
         // Codeunit.Run(Codeunit::TestRecallNotificationHandler);
         // Codeunit.Run(Codeunit::TestFilterPageHandler);
         // Codeunit.Run(Codeunit::TestTransaction);
         // Codeunit.Run(Codeunit::MyReportFullTest);
-        Codeunit.Run(Codeunit::TestFilterPageHandler);
+        // Codeunit.Run(Codeunit::TestFilterPageHandler);
     end;
 
     trigger OnAfterTestRun(CodeunitId: Integer; CodeunitName: Text; FunctionName: Text; Permissions: TestPermissions; Success: Boolean)
@@ -38,8 +40,10 @@ codeunit 50020 MyTestRunner
             log.Status := log.Status::Success
         else begin
             log.Status := log.Status::Failure;
-            if FunctionName <> '' then
+            if FunctionName <> '' then begin
                 log.Message := GetLastErrorText;
+                log.CallStack := CopyStr(GetLastErrorCallStack, 1, MaxStrLen(log.CallStack));
+            end;
         end;
         log.Duration := log.After - log.Before;
         log.Insert();

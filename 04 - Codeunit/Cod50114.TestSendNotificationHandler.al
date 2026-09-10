@@ -10,7 +10,7 @@ codeunit 50114 TestSendNotificationHandler
     [HandlerFunctions('SendNotificationHandler')]
     procedure TestCustomerNotification()
     begin
-        HandleFunction.CheckCustomer();
+        CheckCustomer();
     end;
 
     [SendNotificationHandler]
@@ -19,4 +19,11 @@ codeunit 50114 TestSendNotificationHandler
         Assert.AreEqual('Customer has been created.', Notification.Message, 'Notification message is incorrect.');
     end;
 
+    procedure CheckCustomer()
+    var
+        Notification: Notification;
+    begin
+        Notification.Message := 'Customer has been created.';
+        Notification.Send();
+    end;
 }

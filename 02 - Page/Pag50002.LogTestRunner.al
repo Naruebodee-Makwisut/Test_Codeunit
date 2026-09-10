@@ -20,6 +20,7 @@ page 50002 "Log_TestRunner"
                 field(Status; Rec.Status) { }
                 field(Message; Rec.Message) { }
                 field(Duration; Rec.Duration) { }
+                field(CallStack; Rec.CallStack) { }
             }
         }
     }

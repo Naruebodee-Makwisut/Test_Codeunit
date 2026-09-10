@@ -54,7 +54,7 @@ codeunit 50004 HandleTest
     [HandlerFunctions('CustomerPageHandler')]
     procedure TestOpenCustomerPage()
     begin
-        HandleF.OpenCustomer();
+        OpenCustomer();
     end;
 
 
@@ -62,6 +62,13 @@ codeunit 50004 HandleTest
     procedure CustomerPageHandler(var CustomerPage: TestPage "Customer Card")
     begin
         Assert.IsTrue(CustomerPage.Editable(), 'Page should be editable');
+    end;
+
+    procedure OpenCustomer()
+    var
+        Customer: Record Customer;
+    begin
+        Page.Run(Page::"Customer Card");
     end;
 
 }
